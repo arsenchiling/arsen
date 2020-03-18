@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- подключаем jquery-->
+  <script src="http://code.jquery.com/jquery-1.8.3.js">
+  	
+  </script>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+// прописываем стили элементов
+  $("p").css("fontSize","20px");
+  $("#el2").css("color","green");
+  $(".el3").css("color","red");
+  // делаем форму с ее содержимым неактивной
+  $("form *").prop("disabled",true);
+  //ставис стрелочку перед ссылкой
+  $("a").prepend("↕");
+  // делаем так, чтобы ссылка открывалась в новой вкладке
+  $("a").attr("target", "_blank");
+  // прописываем нажатие на кнопку, чтобы по клику исчезал левый столбец
+  $("#button1").click(function(){
+  	$("#td1").slideUp(100);
+  })
+ 
+  	$("#button2").click(function(){
+  	$("#td2").fadeTo(2000, 0.5);
+  })
+  	$("#button3").click(function(){
+  	$("#td3").slideUp(3000);
+  })
+  	$("#button4").click(function(){
+  	$("#td4").fadeToggle(1000);
+  })
+  	$("#button5").click(function(){
+  	$("#td5").slideDown();
+  	 })
+  });
+
+  	$("#ajax").click(() => {
+    $.ajax({
+        url: "https://inxaoc.github.io/example/ajax-1.html"
+    }).done((e) => {
+        let pageContent = document.createElement("div");
+        pageContent.innerHTML = e;
+        $("body").append(pageContent);
+    });
+});
+
+$.ajax({
+    url: "https://inxaoc.github.io/example/ajax.json"
+}).done((e) => {
+    let req = Object.assign({}, e);
+    console.log(req);
+    $("body").append(createList(req));
+});
+
+  </script>
+ 
+ <style>
+   table {
+    border: 4px double #333; 
+    width: 50%; /* Ширина таблицы */ 
+    border-spacing: 7px 11px; /* Расстояние между ячейками */ 
+   }
+   td {
+    padding: 5px; /* Поля вокруг текста */ 
+    border: 1px solid #a52a2a; /* Граница вокруг ячеек */ 
+   }
+  </style>
+</head>
+<body>
+	<form id="f1">
+		<input type="button" name="b">
+		<input type="text" name="b2">
+	</form>
+	<a href="http://htmlbook.ru/html/a">Ссылка</a>
+	<p id="el2"> SGDdgdsgkjhdsgkjdshgkjdshgjdsghdsgsdgdsgdsg</p>
+	<p class="el3"> 11111111111111111111111111111111111111111111111</p>
+	<table border>
+		<tr>
+			<td  id="td1">
+				11111
+			</td>
+			<td>
+				<input  id="button1" type="button"  >
+			</td>
+		</tr>
+		<tr>
+			<td id="td2">
+				22222
+			</td>
+			<td>
+				<input  id="button2" type="button" >
+			</td>
+		</tr>
+		<tr>
+			<td id="td3">
+				33333
+			</td>
+			<td>
+				<input  id="button3" type="button"  >
+			</td>
+		</tr>
+		<tr>
+			<td id="td4">
+				44444
+			</td>
+			<td>
+				<input  id="button4" type="button" >
+			</td>
+		</tr>
+		<tr>
+			<td style="display: none;" id="td5">
+				55555
+			</td>
+			<td>
+				<input  id="button5" type="button"  >
+			</td>
+		</tr>
+	</table>
+	
+		<input type="submit" id="update" value="Обновить" name="update">
+	
+	<!-- контейнер, в котором будет выводится код страницы -->
+	<div id="content">...</div>
+
+	<script>
+		// функция заггрузки информации по ссылке при помощи ajax
+
+		function show()
+		{
+			$.ajax({
+				url: "https://inxaoc.github.io/example/ajax-1.html",
+				cache: false,
+				// при успешном выполнении запроса контент получаем в качестве параметра. Записывается в контейнер div
+				success: function(html){
+					$("#content").html(html);
+				}
+			});
+
+		}
+		// функция нажатия на кнопку (запускаем функцию show)
+		$("#update").click(function(){
+  	show();
+  })
+
+	</script>
+
+
+ </body>
+</html>
+
+	
+	
